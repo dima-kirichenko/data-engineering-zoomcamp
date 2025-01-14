@@ -25,6 +25,14 @@ What's the version of `pip` in the image?
 - [ ] 23.3.1
 - [ ] 23.2.1
 
+```bash
+docker run -it --rm --entrypoint bash python:3.12.8
+```
+
+```bash
+pip --version
+```
+
 
 ## Question 2. Understanding Docker networking and docker-compose
 
@@ -89,6 +97,28 @@ Download this data and put it into Postgres.
 You can use the code from the course. It's up to you whether
 you want to use Jupyter or a python script.
 
+```bash
+URL="https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/green_tripdata_2019-10.csv.gz"
+```
+
+```bash
+docker build -t taxi_ingest:v001 .
+```
+
+```bash
+docker run -it --rm \
+  --network=01-docker-terraform_default \
+  taxi_ingest:v001 \
+    --user=postgres \
+    --password=postgres \
+    --host=db \
+    --port=5432 \
+    --db=ny_taxi \
+    --table_name=green_tripdata_2019_10 \
+    --url=${URL}
+```
+
+
 ## Question 3. Trip Segmentation Count
 
 During the period of October 1st 2019 (inclusive) and November 1st 2019 (exclusive), how many trips, **respectively**, happened:
@@ -100,11 +130,23 @@ During the period of October 1st 2019 (inclusive) and November 1st 2019 (exclusi
 
 Answers:
 
-- 104,802;  197,670;  110,612;  27,831;  35,281
-- 104,802;  198,924;  109,603;  27,678;  35,189
-- 104,793;  201,407;  110,612;  27,831;  35,281
-- 104,793;  202,661;  109,603;  27,678;  35,189
-- 104,838;  199,013;  109,645;  27,688;  35,202
+- [ ] 104,802;  197,670;  110,612;  27,831;  35,281
+- [x] 104,802;  198,924;  109,603;  27,678;  35,189
+- [ ] 104,793;  201,407;  110,612;  27,831;  35,281
+- [ ] 104,793;  202,661;  109,603;  27,678;  35,189
+- [ ] 104,838;  199,013;  109,645;  27,688;  35,202
+
+```sql
+SELECT
+  SUM(CASE WHEN trip_distance <= 1 THEN 1 ELSE 0 END) AS up_to_1,
+  SUM(CASE WHEN trip_distance > 1 AND trip_distance <= 3 THEN 1 ELSE 0 END) AS between_1_and_3,
+  SUM(CASE WHEN trip_distance > 3 AND trip_distance <= 7 THEN 1 ELSE 0 END) AS between_3_and_7,
+  SUM(CASE WHEN trip_distance > 7 AND trip_distance <= 10 THEN 1 ELSE 0 END) AS between_7_and_10,
+  SUM(CASE WHEN trip_distance > 10 THEN 1 ELSE 0 END) AS over_10
+FROM "green_tripdata_2019-10"
+WHERE lpep_pickup_datetime >= '2019-10-01'
+  AND lpep_dropoff_datetime < '2019-11-01';
+```
 
 
 ## Question 4. Longest trip for each day
@@ -114,10 +156,22 @@ Use the pick up time for your calculations.
 
 Tip: For every day, we only care about one single trip with the longest distance. 
 
-- 2019-10-11
-- 2019-10-24
-- 2019-10-26
-- 2019-10-31
+- [ ] 2019-10-11
+- [ ] 2019-10-24
+- [ ] 2019-10-26
+- [x] 2019-10-31 515.89
+
+```sql
+SELECT 
+  DATE(lpep_pickup_datetime) as pickup_date,
+  MAX(trip_distance) as max_trip_distance
+FROM "green_tripdata_2019-10"
+WHERE DATE(lpep_pickup_datetime) IN 
+  ('2019-10-11', '2019-10-24', '2019-10-26', '2019-10-31')
+GROUP BY DATE(lpep_pickup_datetime)
+ORDER BY max_trip_distance DESC
+LIMIT 1;
+```
 
 
 ## Question 5. Three biggest pickup zones
@@ -127,10 +181,27 @@ Which were the top pickup locations with over 13,000 in
 
 Consider only `lpep_pickup_datetime` when filtering by date.
  
-- East Harlem North, East Harlem South, Morningside Heights
-- East Harlem North, Morningside Heights
-- Morningside Heights, Astoria Park, East Harlem South
-- Bedford, East Harlem North, Astoria Park
+- [x] East Harlem North, East Harlem South, Morningside Heights 18686.680000000088, 16797.260000000075, 13029.790000000039
+- [ ] East Harlem North, Morningside Heights
+- [ ] Morningside Heights, Astoria Park, East Harlem South
+- [ ] Bedford, East Harlem North, Astoria Park
+
+```sql
+SELECT 
+    zn."Zone" as pickup_zone,
+    SUM(gt.total_amount) as total_amount
+FROM 
+    "green_tripdata_2019-10" gt
+    JOIN "taxi_zone_lookup" zn ON gt."PULocationID" = zn."LocationID"
+WHERE 
+    DATE(lpep_pickup_datetime) = '2019-10-18'
+GROUP BY 
+    zn."Zone"
+HAVING 
+    SUM(total_amount) > 13000
+ORDER BY 
+    total_amount DESC;
+```
 
 
 ## Question 6. Largest tip
@@ -143,10 +214,29 @@ Note: it's `tip` , not `trip`
 
 We need the name of the zone, not the ID.
 
-- Yorkville West
-- JFK Airport
-- East Harlem North
-- East Harlem South
+- [ ] Yorkville West
+- [x] JFK Airport 87.3
+- [ ] East Harlem North
+- [ ] East Harlem South
+
+```sql
+SELECT 
+    dzones."Zone" as dropoff_zone,
+    MAX(tip_amount) as max_tip
+FROM 
+    "green_tripdata_2019-10" g
+    JOIN taxi_zone_lookup pzones 
+        ON g."PULocationID" = pzones."LocationID"
+    JOIN taxi_zone_lookup dzones 
+        ON g."DOLocationID" = dzones."LocationID"
+WHERE 
+    pzones."Zone" = 'East Harlem North'
+GROUP BY 
+    dzones."Zone"
+ORDER BY 
+    max_tip DESC
+LIMIT 1;
+```
 
 
 ## Terraform

@@ -10,7 +10,7 @@ site.
 This repository should contain the code for solving the homework. 
 
 When your solution has SQL or shell commands and not code
-(e.g. python files) file formad, include them directly in
+(e.g. python files) file format, include them directly in
 the README file of your repository.
 
 
@@ -24,6 +24,8 @@ What's the version of `pip` in the image?
 - [ ] 24.2.1
 - [ ] 23.3.1
 - [ ] 23.2.1
+
+### Solution
 
 ```bash
 docker run -it --rm --entrypoint bash python:3.12.8
@@ -97,6 +99,8 @@ Download this data and put it into Postgres.
 You can use the code from the course. It's up to you whether
 you want to use Jupyter or a python script.
 
+### Solution (using [Docker](https://github.com/dima-kirichenko/data-engineering-zoomcamp/tree/2025/01-docker-terraform/2_docker_sql))
+
 ```bash
 URL="https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/green_tripdata_2019-10.csv.gz"
 ```
@@ -123,9 +127,9 @@ docker run -it --rm \
 
 During the period of October 1st 2019 (inclusive) and November 1st 2019 (exclusive), how many trips, **respectively**, happened:
 1. Up to 1 mile
-2. In between 1 (exclusive) and 3 miles (inclusive),
-3. In between 3 (exclusive) and 7 miles (inclusive),
-4. In between 7 (exclusive) and 10 miles (inclusive),
+2. In between 1 (exclusive) and 3 miles (inclusive)
+3. In between 3 (exclusive) and 7 miles (inclusive)
+4. In between 7 (exclusive) and 10 miles (inclusive)
 5. Over 10 miles 
 
 Answers:
@@ -135,6 +139,8 @@ Answers:
 - [ ] 104,793;  201,407;  110,612;  27,831;  35,281
 - [ ] 104,793;  202,661;  109,603;  27,678;  35,189
 - [ ] 104,838;  199,013;  109,645;  27,688;  35,202
+
+### Solution
 
 ```sql
 SELECT
@@ -161,6 +167,8 @@ Tip: For every day, we only care about one single trip with the longest distance
 - [ ] 2019-10-26
 - [x] 2019-10-31 515.89
 
+### Solution
+
 ```sql
 SELECT 
   DATE(lpep_pickup_datetime) as pickup_date,
@@ -186,6 +194,8 @@ Consider only `lpep_pickup_datetime` when filtering by date.
 - [ ] Morningside Heights, Astoria Park, East Harlem South
 - [ ] Bedford, East Harlem North, Astoria Park
 
+### Solution
+
 ```sql
 SELECT 
     zn."Zone" as pickup_zone,
@@ -206,7 +216,7 @@ ORDER BY
 
 ## Question 6. Largest tip
 
-For the passengers picked up in Ocrober 2019 in the zone
+For the passengers picked up in October 2019 in the zone
 name "East Harlem North" which was the drop off zone that had
 the largest tip?
 
@@ -224,11 +234,11 @@ SELECT
     dzones."Zone" as dropoff_zone,
     MAX(tip_amount) as max_tip
 FROM 
-    "green_tripdata_2019-10" g
+    "green_tripdata_2019-10" gt
     JOIN taxi_zone_lookup pzones 
-        ON g."PULocationID" = pzones."LocationID"
+        ON gt."PULocationID" = pzones."LocationID"
     JOIN taxi_zone_lookup dzones 
-        ON g."DOLocationID" = dzones."LocationID"
+        ON gt."DOLocationID" = dzones."LocationID"
 WHERE 
     pzones."Zone" = 'East Harlem North'
 GROUP BY 
@@ -255,7 +265,7 @@ Modify the files as necessary to create a GCP Bucket and Big Query Dataset.
 Which of the following sequences, **respectively**, describes the workflow for: 
 1. Downloading the provider plugins and setting up backend,
 2. Generating proposed changes and auto-executing the plan
-3. Remove all resources managed by terraform`
+3. Remove all resources managed by terraform
 
 Answers:
 - terraform import, terraform apply -y, terraform destroy

@@ -5,6 +5,16 @@
 *.tfstate.*
 **.terraform
 **.terraform.lock.*
+
+.terraform/
+crash.log
+crash.*.log
+.terraformrc
+terraform.rc
+*.tfvars
+*.auto.tfvars
+.tfplan
+
 **google_credentials.json
 **logs/
 **.env

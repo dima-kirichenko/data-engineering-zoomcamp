@@ -259,6 +259,10 @@ Copy the files from the course repo
 
 Modify the files as necessary to create a GCP Bucket and Big Query Dataset.
 
+### Solution
+
+[Terraform with variables](https://github.com/dima-kirichenko/data-engineering-zoomcamp/tree/2025/01-docker-terraform/1_terraform_gcp/terraform/terraform_with_variables)
+
 
 ## Question 7. Terraform Workflow
 
@@ -268,11 +272,11 @@ Which of the following sequences, **respectively**, describes the workflow for:
 3. Remove all resources managed by terraform
 
 Answers:
-- terraform import, terraform apply -y, terraform destroy
-- teraform init, terraform plan -auto-apply, terraform rm
-- terraform init, terraform run -auto-aprove, terraform destroy
-- terraform init, terraform apply -auto-aprove, terraform destroy
-- terraform import, terraform apply -y, terraform rm
+- [ ] terraform import, terraform apply -y, terraform destroy
+- [ ] terraform init, terraform plan -auto-apply, terraform rm
+- [ ] terraform init, terraform run -auto-approve, terraform destroy
+- [x] terraform init, terraform apply -auto-approve, terraform destroy
+- [ ] terraform import, terraform apply -y, terraform rm
 
 
 ## Submitting the solutions

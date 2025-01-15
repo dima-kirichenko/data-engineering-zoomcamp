@@ -1,6 +1,6 @@
 variable "credentials" {
   description = "My Credentials"
-  default     = "/mnt/c/Users/dki/Downloads/docker-terraform-447912-ea596215bd44.json"
+  default     = "/mnt/c/Users/dki/Downloads/docker-terraform-447912-7ca04423efd1.json"
   #ex: if you have a directory where this file is called keys with your service account json file
   #saved there as my-creds.json you could use default = "./keys/my-creds.json"
 }

@@ -11,6 +11,7 @@ This repository should contain the code for solving the homework.
 
 When your solution has SQL or shell commands and not code
 (e.g. python files) file format, include them directly in
+(e.g. python files) file format, include them directly in
 the README file of your repository.
 
 
@@ -216,6 +217,7 @@ ORDER BY
 
 ## Question 6. Largest tip
 
+For the passengers picked up in October 2019 in the zone
 For the passengers picked up in October 2019 in the zone
 name "East Harlem North" which was the drop off zone that had
 the largest tip?

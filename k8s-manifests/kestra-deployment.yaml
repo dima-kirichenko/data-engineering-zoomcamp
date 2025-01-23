@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kestra
+spec:
+  selector:
+    matchLabels:
+      app: kestra
+  template:
+    metadata:
+      labels:
+        app: kestra
+    spec:
+      containers:
+      - name: kestra
+        image: kestra/kestra:latest
+        command: ["server", "standalone"]
+        ports:
+        - containerPort: 8080
+        - containerPort: 8081
+        env:
+        - name: KESTRA_CONFIGURATION
+          value: |
+            datasources:
+              postgres:
+                url: jdbc:postgresql://postgres:5432/kestra
+                driverClassName: org.postgresql.Driver
+                username: kestra
+                password: k3str4
+            kestra:
+              server:
+                basicAuth:
+                  enabled: false
+                  username: "admin@kestra.io"
+                  password: kestra
+              repository:
+                type: postgres
+              storage:
+                type: local
+                local:
+                  basePath: "/app/storage"
+              queue:
+                type: postgres
+              tasks:
+                tmpDir:
+                  path: /tmp/kestra-wd/tmp
+              url: http://localhost:8080/
+        securityContext:
+          runAsUser: 0  # Required for Minikube compatibility
+          privileged: true  # Needed for Docker operations
+        volumeMounts:
+        - name: kestra-data
+          mountPath: /app/storage
+        - name: tmp-dir
+          mountPath: /tmp/kestra-wd
+      volumes:
+      - name: kestra-data
+        persistentVolumeClaim:
+          claimName: kestra-data
+      - name: tmp-dir
+        emptyDir: {}  # Temporary directory for Minikube
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kestra
+spec:
+  type: NodePort
+  selector:
+    app: kestra
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+    nodePort: 30080
+  - name: metrics
+    port: 8081
+    targetPort: 8081
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: kestra-data
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

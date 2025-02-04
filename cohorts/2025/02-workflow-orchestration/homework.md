@@ -22,6 +22,11 @@ As a hint, Kestra makes that process really easy:
 1. You can leverage the backfill functionality in the [scheduled flow](../../../02-workflow-orchestration/flows/06_gcp_taxi_scheduled.yaml) to backfill the data for the year 2021. Just make sure to select the time period for which data exists i.e. from `2021-01-01` to `2021-07-31`. Also, make sure to do the same for both `yellow` and `green` taxi data (select the right service in the `taxi` input).
 2. Alternatively, run the flow manually for each of the seven months of 2021 for both `yellow` and `green` taxi data. Challenge for you: find out how to loop over the combination of Year-Month and `taxi`-type using `ForEach` task which triggers the flow for each combination using a `Subflow` task.
 
+### Solution
+
+https://youtu.be/_-li_z97zog?si=knBpA7Gx-DnU039-&t=148
+
+
 ### Quiz Questions
 
 Complete the Quiz shown below. It’s a set of 6 multiple-choice questions to test your understanding of workflow orchestration, Kestra and ETL pipelines for data lakes and warehouses.
@@ -56,23 +61,50 @@ Complete the Quiz shown below. It’s a set of 6 multiple-choice questions to te
 
 3. How many rows are there for the `Yellow` Taxi data for all CSV files in the year 2020?
 - [ ] 13,537.299
-- [ ] 24,648,499
+- [x] 24,648,499
 - [ ] 18,324,219
 - [ ] 29,430,127
 
-1) How many rows are there for the `Green` Taxi data for all CSV files in the year 2020?
+### Solution
+
+```sql
+SELECT COUNT(*) AS total_2020_rows
+FROM public.yellow_tripdata
+WHERE filename LIKE 'yellow_tripdata_2020-%';
+```
+
+
+4. How many rows are there for the `Green` Taxi data for all CSV files in the year 2020?
 - [ ] 5,327,301
 - [ ] 936,199
-- [ ] 1,734,051
+- [x] 1,734,051
 - [ ] 1,342,034
 
-1) How many rows are there for the `Yellow` Taxi data for the March 2021 CSV file?
+### Solution
+
+```sql
+SELECT COUNT(*) AS total_2020_rows
+FROM public.green_tripdata
+WHERE filename LIKE 'green_tripdata_2020-%';
+```
+
+
+5. How many rows are there for the `Yellow` Taxi data for the March 2021 CSV file?
 - [ ] 1,428,092
 - [ ] 706,911
-- [ ] 1,925,152
+- [x] 1,925,152
 - [ ] 2,561,031
 
-1) How would you configure the timezone to New York in a Schedule trigger?
+### Solution
+
+```sql
+SELECT COUNT(*) AS total_rows
+FROM public.yellow_tripdata
+WHERE filename = 'yellow_tripdata_2021-03.csv';
+```
+
+
+6. How would you configure the timezone to New York in a Schedule trigger?
 - [ ] Add a `timezone` property set to `EST` in the `Schedule` trigger configuration  
 - [ ] Add a `timezone` property set to `America/New_York` in the `Schedule` trigger configuration
 - [ ] Add a `timezone` property set to `UTC-5` in the `Schedule` trigger configuration

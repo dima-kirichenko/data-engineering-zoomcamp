@@ -2,7 +2,7 @@
 
 ATTENTION: At the end of the submission form, you will be required to include a link to your GitHub repository or other public code-hosting site. This repository should contain your code for solving the homework. If your solution includes code that is not in file format, please include these directly in the README file of your repository.
 
-> In case you don't get one option exactly, select the closest one 
+> In case you don't get one option exactly, select the closest one
 
 For the homework, we'll be working with the _green_ taxi dataset located here:
 
@@ -106,9 +106,13 @@ WHERE filename = 'yellow_tripdata_2021-03.csv';
 
 6. How would you configure the timezone to New York in a Schedule trigger?
 - [ ] Add a `timezone` property set to `EST` in the `Schedule` trigger configuration  
-- [ ] Add a `timezone` property set to `America/New_York` in the `Schedule` trigger configuration
+- [x] Add a `timezone` property set to `America/New_York` in the `Schedule` trigger configuration
 - [ ] Add a `timezone` property set to `UTC-5` in the `Schedule` trigger configuration
-- [ ] Add a `location` property set to `New_York` in the `Schedule` trigger configuration  
+- [ ] Add a `location` property set to `New_York` in the `Schedule` trigger configuration
+
+### Solution
+
+![timezone](../../../cohorts/2025/02-workflow-orchestration/timezone.png)
 
 
 ## Submitting the solutions

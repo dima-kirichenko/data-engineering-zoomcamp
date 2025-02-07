@@ -21,12 +21,21 @@ Create an external table using the Yellow Taxi Trip Records. </br>
 Create a (regular/materialized) table in BQ using the Yellow Taxi Trip Records (do not partition or cluster this table). </br>
 </p>
 
+### Solution
+
+[create_bq_tables.py](./create_bq_tables.py)
+
+
 ## Question 1:
-Question 1: What is count of records for the 2024 Yellow Taxi Data?
+What is count of records for the 2024 Yellow Taxi Data?
 - [ ] 65,623
 - [ ] 840,402
 - [x] 20,332,093
 - [ ] 85,431,289
+
+### Solution
+
+[verify_bq_tables.py](./verify_bq_tables.py)
 
 
 ## Question 2:
@@ -38,6 +47,11 @@ What is the **estimated amount** of data that will be read when this query is ex
 - [ ] 2.14 GB for the External Table and 0MB for the Materialized Table
 - [ ] 0 MB for the External Table and 0MB for the Materialized Table
 
+### Solution
+
+[check_distinct_locations.py](./check_distinct_locations.py)
+
+
 ## Question 3:
 Write a query to retrieve the PULocationID from the table (not the external table) in BigQuery. Now write a query to retrieve the PULocationID and DOLocationID on the same table. Why are the estimated number of Bytes different?
 - [x] BigQuery is a columnar database, and it only scans the specific columns requested in the query. Querying two columns (PULocationID, DOLocationID) requires 
@@ -47,6 +61,11 @@ doubling the estimated bytes processed.
 - [ ] BigQuery automatically caches the first queried column, so adding a second column increases processing time but does not affect the estimated bytes scanned.
 - [ ] When selecting multiple columns, BigQuery performs an implicit join operation between them, increasing the estimated bytes processed
 
+### Solution
+
+[compare_column_bytes.py](./compare_column_bytes.py)
+
+
 ## Question 4:
 How many records have a fare_amount of 0?
 - [ ] 128,210
@@ -54,12 +73,21 @@ How many records have a fare_amount of 0?
 - [ ] 20,188,016
 - [x] 8,333
 
+### Solution
+
+[check_zero_fares.py](./check_zero_fares.py)
+
+
 ## Question 5:
 What is the best strategy to make an optimized table in Big Query if your query will always filter based on tpep_dropoff_datetime and order the results by VendorID (Create a new table with this strategy)
 - [x] Partition by tpep_dropoff_datetime and Cluster on VendorID
 - [ ] Cluster on by tpep_dropoff_datetime and Cluster on VendorID
 - [ ] Cluster on tpep_dropoff_datetime Partition by VendorID
 - [ ] Partition by tpep_dropoff_datetime and Partition by VendorID
+
+### Solution
+
+[create_optimized_table.py](./create_optimized_table.py)
 
 
 ## Question 6:
@@ -74,6 +102,10 @@ Choose the answer which most closely matches.</br>
 - [x] 310.24 MB for non-partitioned table and 26.84 MB for the partitioned table
 - [ ] 5.87 MB for non-partitioned table and 0 MB for the partitioned table
 - [ ] 310.31 MB for non-partitioned table and 285.64 MB for the partitioned table
+
+### Solution
+
+[compare_table_performance.py](./compare_table_performance.py)
 
 
 ## Question 7: 
@@ -92,6 +124,10 @@ It is best practice in Big Query to always cluster your data:
 
 ## (Bonus: Not worth points) Question 9:
 No Points: Write a `SELECT count(*)` query FROM the materialized table you created. How many bytes does it estimate will be read? Why?
+
+### Solution
+
+[check_count_bytes.py](./check_count_bytes.py)
 
 Answer: The query estimates 0 bytes will be read. This is because BigQuery maintains table statistics including row counts as metadata. When running COUNT(*) without any WHERE clause, BigQuery can simply return this pre-computed value from the metadata without scanning any actual data. This is a specific optimization for counting all rows in a table. In contrast, if you COUNT a specific column like VendorID, it will need to scan that column's data (155.12 MB in our case) to count non-null values.
 

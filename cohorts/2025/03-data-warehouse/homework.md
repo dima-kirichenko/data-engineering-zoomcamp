@@ -135,3 +135,7 @@ Answer: The query estimates 0 bytes will be read. This is because BigQuery maint
 ## Submitting the solutions
 
 Form for submitting: https://courses.datatalks.club/de-zoomcamp-2025/homework/hw3
+
+## Solution
+
+Solution: https://www.youtube.com/watch?v=wpLmImIUlPg

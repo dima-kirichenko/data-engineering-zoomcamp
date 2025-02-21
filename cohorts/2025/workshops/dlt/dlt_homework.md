@@ -109,8 +109,7 @@ conn.sql("DESCRIBE").df()
 
 ```
 
-**Answer:**
-* How many tables were created?
+How many tables were created?
 
 - [ ] 2
 - [x] 4
@@ -126,8 +125,7 @@ df = pipeline.dataset(dataset_type="default").rides.df()
 df
 ```
 
-**Answer:**
-* What is the total number of records extracted?
+What is the total number of records extracted?
 
 - [ ] 2500
 - [ ] 5000
@@ -153,8 +151,7 @@ with pipeline.sql_client() as client:
     print(res)
 ```
 
-**Answer:**
-* What is the average trip duration?
+What is the average trip duration?
 
 - [x] 12.3049
 - [ ] 22.3049

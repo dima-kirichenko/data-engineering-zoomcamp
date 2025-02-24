@@ -23,7 +23,8 @@ dim_zones as (
     select * from {{ ref('dim_zones') }}
     where borough != 'Unknown'
 )
-select trips_unioned.tripid, 
+select 
+    trips_unioned.tripid, 
     trips_unioned.vendorid, 
     trips_unioned.service_type,
     trips_unioned.ratecodeid, 
@@ -33,7 +34,13 @@ select trips_unioned.tripid,
     trips_unioned.dropoff_locationid,
     dropoff_zone.borough as dropoff_borough, 
     dropoff_zone.zone as dropoff_zone,  
-    trips_unioned.pickup_datetime, 
+    trips_unioned.pickup_datetime,
+    -- Adding time-based dimensions
+    extract(year from trips_unioned.pickup_datetime) as year,
+    extract(quarter from trips_unioned.pickup_datetime) as quarter,
+    concat(cast(extract(year from trips_unioned.pickup_datetime) as string), '/Q', 
+           cast(extract(quarter from trips_unioned.pickup_datetime) as string)) as year_quarter,
+    extract(month from trips_unioned.pickup_datetime) as month,
     trips_unioned.dropoff_datetime, 
     trips_unioned.store_and_fwd_flag, 
     trips_unioned.passenger_count, 

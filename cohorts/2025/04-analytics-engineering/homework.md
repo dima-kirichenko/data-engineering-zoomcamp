@@ -154,8 +154,96 @@ Considering the YoY Growth in 2020, which were the yearly quarters with the best
 - [ ] green: {best: 2020/Q2, worst: 2020/Q1}, yellow: {best: 2020/Q2, worst: 2020/Q1}
 - [ ] green: {best: 2020/Q2, worst: 2020/Q1}, yellow: {best: 2020/Q3, worst: 2020/Q4}
 - [ ] green: {best: 2020/Q1, worst: 2020/Q2}, yellow: {best: 2020/Q2, worst: 2020/Q1}
-- [ ] green: {best: 2020/Q1, worst: 2020/Q2}, yellow: {best: 2020/Q1, worst: 2020/Q2}
+- [x] green: {best: 2020/Q1, worst: 2020/Q2}, yellow: {best: 2020/Q1, worst: 2020/Q2}
 - [ ] green: {best: 2020/Q1, worst: 2020/Q2}, yellow: {best: 2020/Q3, worst: 2020/Q4}
+
+### Solution
+
+* [fct_taxi_trips_quarterly_revenue.sql](../../../04-analytics-engineering/taxi_rides_ny/models/core/fct_taxi_trips_quarterly_revenue.sql)
+
+```json
+[{
+  "service_type": "Green",
+  "year": "2020",
+  "quarter": "1",
+  "year_quarter": "2020/Q1",
+  "curr_revenue": "11480845.79",
+  "curr_trip_count": "771967",
+  "prev_revenue": "26440852.61",
+  "prev_trip_count": "1604976",
+  "yoy_growth": "-56.58"
+}, {
+  "service_type": "Green",
+  "year": "2020",
+  "quarter": "2",
+  "year_quarter": "2020/Q2",
+  "curr_revenue": "1544036.31",
+  "curr_trip_count": "92030",
+  "prev_revenue": "21498354",
+  "prev_trip_count": "1353154",
+  "yoy_growth": "-92.82"
+}, {
+  "service_type": "Green",
+  "year": "2020",
+  "quarter": "3",
+  "year_quarter": "2020/Q3",
+  "curr_revenue": "2360835.79",
+  "curr_trip_count": "135061",
+  "prev_revenue": "17651033.84",
+  "prev_trip_count": "1125486",
+  "yoy_growth": "-86.62"
+}, {
+  "service_type": "Green",
+  "year": "2020",
+  "quarter": "4",
+  "year_quarter": "2020/Q4",
+  "curr_revenue": "2441470.26",
+  "curr_trip_count": "143369",
+  "prev_revenue": "15680616.87",
+  "prev_trip_count": "1028597",
+  "yoy_growth": "-84.43"
+}, {
+  "service_type": "Yellow",
+  "year": "2020",
+  "quarter": "1",
+  "year_quarter": "2020/Q1",
+  "curr_revenue": "144118740.68",
+  "curr_trip_count": "7919762",
+  "prev_revenue": "182726465.78",
+  "prev_trip_count": "10489552",
+  "yoy_growth": "-21.13"
+}, {
+  "service_type": "Yellow",
+  "year": "2020",
+  "quarter": "2",
+  "year_quarter": "2020/Q2",
+  "curr_revenue": "15560725.84",
+  "curr_trip_count": "935075",
+  "prev_revenue": "200295029.75",
+  "prev_trip_count": "10411584",
+  "yoy_growth": "-92.23"
+}, {
+  "service_type": "Yellow",
+  "year": "2020",
+  "quarter": "3",
+  "year_quarter": "2020/Q3",
+  "curr_revenue": "41404401.54",
+  "curr_trip_count": "2476467",
+  "prev_revenue": "186983365.59",
+  "prev_trip_count": "9680791",
+  "yoy_growth": "-77.86"
+}, {
+  "service_type": "Yellow",
+  "year": "2020",
+  "quarter": "4",
+  "year_quarter": "2020/Q4",
+  "curr_revenue": "56283852.03",
+  "curr_trip_count": "3437267",
+  "prev_revenue": "191426503.99",
+  "prev_trip_count": "9997848",
+  "yoy_growth": "-70.6"
+}]
+```
 
 
 ### Question 6: P97/P95/P90 Taxi Monthly Fare
@@ -167,10 +255,34 @@ Considering the YoY Growth in 2020, which were the yearly quarters with the best
 Now, what are the values of `p97`, `p95`, `p90` for Green Taxi and Yellow Taxi, in April 2020?
 
 - [ ] green: {p97: 55.0, p95: 45.0, p90: 26.5}, yellow: {p97: 52.0, p95: 37.0, p90: 25.5}
-- [ ] green: {p97: 55.0, p95: 45.0, p90: 26.5}, yellow: {p97: 31.5, p95: 25.5, p90: 19.0}
+- [x] green: {p97: 55.0, p95: 45.0, p90: 26.5}, yellow: {p97: 31.5, p95: 25.5, p90: 19.0}
 - [ ] green: {p97: 40.0, p95: 33.0, p90: 24.5}, yellow: {p97: 52.0, p95: 37.0, p90: 25.5}
 - [ ] green: {p97: 40.0, p95: 33.0, p90: 24.5}, yellow: {p97: 31.5, p95: 25.5, p90: 19.0}
 - [ ] green: {p97: 55.0, p95: 45.0, p90: 26.5}, yellow: {p97: 52.0, p95: 25.5, p90: 19.0}
+
+### Solution
+
+* [fct_taxi_trips_monthly_fare_p95.sql](../../../04-analytics-engineering/taxi_rides_ny/models/core/fct_taxi_trips_monthly_fare_p95.sql)
+
+```json
+[{
+  "service_type": "Green",
+  "year": "2020",
+  "month": "4",
+  "trip_count": "22354",
+  "p97_fare": "55.0",
+  "p95_fare": "45.0",
+  "p90_fare": "26.5"
+}, {
+  "service_type": "Yellow",
+  "year": "2020",
+  "month": "4",
+  "trip_count": "199342",
+  "p97_fare": "31.5",
+  "p95_fare": "25.5",
+  "p90_fare": "19.0"
+}]
+```
 
 
 ### Question 7: Top #Nth longest P90 travel time Location for FHV
@@ -187,11 +299,33 @@ Now...
 
 For the Trips that **respectively** started from `Newark Airport`, `SoHo`, and `Yorkville East`, in November 2019, what are **dropoff_zones** with the 2nd longest p90 trip_duration ?
 
-- [ ] LaGuardia Airport, Chinatown, Garment District
+- [x] LaGuardia Airport, Chinatown, Garment District
 - [ ] LaGuardia Airport, Park Slope, Clinton East
 - [ ] LaGuardia Airport, Saint Albans, Howard Beach
 - [ ] LaGuardia Airport, Rosedale, Bath Beach
 - [ ] LaGuardia Airport, Yorkville East, Greenpoint
+
+### Solution
+
+* [dim_fhv_trips.sql](../../../04-analytics-engineering/taxi_rides_ny/models/core/dim_fhv_trips.sql)
+* [stg_fhv_tripdata.sql](../../../04-analytics-engineering/taxi_rides_ny/models/staging/stg_fhv_tripdata.sql)
+* [fct_fhv_monthly_zone_traveltime_p90.sql](../../../04-analytics-engineering/taxi_rides_ny/models/core/fct_fhv_monthly_zone_traveltime_p90.sql)
+
+```json
+[{
+  "pickup_zone": "Newark Airport",
+  "dropoff_zone": "LaGuardia Airport",
+  "p90_duration_seconds": "7029.0"
+}, {
+  "pickup_zone": "SoHo",
+  "dropoff_zone": "Chinatown",
+  "p90_duration_seconds": "19496.0"
+}, {
+  "pickup_zone": "Yorkville East",
+  "dropoff_zone": "Garment District",
+  "p90_duration_seconds": "13846.0"
+}]
+```
 
 
 ## Submitting the solutions

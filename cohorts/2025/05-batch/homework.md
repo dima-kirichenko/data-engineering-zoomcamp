@@ -25,6 +25,7 @@ What's the output?
 ```bash
 Spark version: 3.5.4
 ```
+* [check_spark.py](check_spark.py)
 
 ## Question 2: Yellow October 2024
 

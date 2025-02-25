@@ -35,10 +35,12 @@ Repartition the Dataframe to 4 partitions and save it to parquet.
 What is the average size of the Parquet (ending with .parquet extension) Files that were created (in MB)? Select the answer which most closely matches.
 
 - [ ] 6MB
-- [ ] 25MB
+- [x] 25MB 22.40MB
 - [ ] 75MB
 - [ ] 100MB
 
+### Solution
+[question2_solution.py](question2_solution.py)
 
 ## Question 3: Count records 
 
@@ -48,9 +50,11 @@ Consider only trips that started on the 15th of October.
 
 - [ ] 85,567
 - [ ] 105,567
-- [ ] 125,567
+- [x] 125,567 128,893
 - [ ] 145,567
 
+### Solution
+[question3_solution.py](question3_solution.py)
 
 ## Question 4: Longest trip
 
@@ -58,9 +62,11 @@ What is the length of the longest trip in the dataset in hours?
 
 - [ ] 122
 - [ ] 142
-- [ ] 162
+- [x] 162 162.62
 - [ ] 182
 
+### Solution
+[question4_solution.py](question4_solution.py)
 
 ## Question 5: User Interface
 
@@ -68,10 +74,8 @@ Spark’s User Interface which shows the application's dashboard runs on which l
 
 - [ ] 80
 - [ ] 443
-- [ ] 4040
+- [x] 4040
 - [ ] 8080
-
-
 
 ## Question 6: Least frequent pickup location zone
 
@@ -83,11 +87,13 @@ wget https://d37ci6vzurychx.cloudfront.net/misc/taxi_zone_lookup.csv
 
 Using the zone lookup data and the Yellow October 2024 data, what is the name of the LEAST frequent pickup location Zone?
 
-- [ ] Governor's Island/Ellis Island/Liberty Island
+- [x] Governor's Island/Ellis Island/Liberty Island 1 pickup
 - [ ] Arden Heights
 - [ ] Rikers Island
 - [ ] Jamaica Bay
 
+### Solution
+[question6_solution.py](question6_solution.py)
 
 ## Submitting the solutions
 

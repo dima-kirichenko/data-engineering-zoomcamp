@@ -14,13 +14,17 @@ wget https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-10.par
 - Install Spark
 - Run PySpark
 - Create a local spark session
-- Execute spark.version.
+- Execute spark.version
 
 What's the output?
 
 > [!NOTE]
 > To install PySpark follow this [guide](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/05-batch/setup/pyspark.md)
 
+### Solution
+```bash
+Spark version: 3.5.4
+```
 
 ## Question 2: Yellow October 2024
 
@@ -30,10 +34,10 @@ Repartition the Dataframe to 4 partitions and save it to parquet.
 
 What is the average size of the Parquet (ending with .parquet extension) Files that were created (in MB)? Select the answer which most closely matches.
 
-- 6MB
-- 25MB
-- 75MB
-- 100MB
+- [ ] 6MB
+- [ ] 25MB
+- [ ] 75MB
+- [ ] 100MB
 
 
 ## Question 3: Count records 
@@ -42,30 +46,30 @@ How many taxi trips were there on the 15th of October?
 
 Consider only trips that started on the 15th of October.
 
-- 85,567
-- 105,567
-- 125,567
-- 145,567
+- [ ] 85,567
+- [ ] 105,567
+- [ ] 125,567
+- [ ] 145,567
 
 
 ## Question 4: Longest trip
 
 What is the length of the longest trip in the dataset in hours?
 
-- 122
-- 142
-- 162
-- 182
+- [ ] 122
+- [ ] 142
+- [ ] 162
+- [ ] 182
 
 
 ## Question 5: User Interface
 
 Spark’s User Interface which shows the application's dashboard runs on which local port?
 
-- 80
-- 443
-- 4040
-- 8080
+- [ ] 80
+- [ ] 443
+- [ ] 4040
+- [ ] 8080
 
 
 
@@ -79,10 +83,10 @@ wget https://d37ci6vzurychx.cloudfront.net/misc/taxi_zone_lookup.csv
 
 Using the zone lookup data and the Yellow October 2024 data, what is the name of the LEAST frequent pickup location Zone?
 
-- Governor's Island/Ellis Island/Liberty Island
-- Arden Heights
-- Rikers Island
-- Jamaica Bay
+- [ ] Governor's Island/Ellis Island/Liberty Island
+- [ ] Arden Heights
+- [ ] Rikers Island
+- [ ] Jamaica Bay
 
 
 ## Submitting the solutions

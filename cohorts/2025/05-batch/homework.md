@@ -51,7 +51,7 @@ Consider only trips that started on the 15th of October.
 
 - [ ] 85,567
 - [ ] 105,567
-- [x] 125,567 128,893
+- [x] 125,567 (Timezone Europe/Berlin; 128,893 for UTC)
 - [ ] 145,567
 
 ### Solution

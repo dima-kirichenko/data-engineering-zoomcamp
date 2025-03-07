@@ -2,7 +2,9 @@
 # Script to count taxi trips that started on October 15, 2024
 
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import to_date, col, year, month, dayofmonth, hour
+from pyspark.sql.functions import to_date, col, year, month, dayofmonth, hour, from_utc_timestamp
+
+desired_timezone = 'Europe/Berlin'  # Set your desired time zone here
 
 # Initialize Spark session
 spark = SparkSession.builder \
@@ -21,6 +23,24 @@ oct_15_trips = df.filter(
     (month(col("tpep_pickup_datetime")) == 10) & 
     (dayofmonth(col("tpep_pickup_datetime")) == 15)
 )
+
+# Convert pickup datetime to desired time zone
+oct_15_trips_tz = df.withColumn(
+    "pickup_datetime_tz", from_utc_timestamp(col("tpep_pickup_datetime"), desired_timezone)
+).withColumn(
+    "dropoff_datetime_tz", from_utc_timestamp(col("tpep_dropoff_datetime"), desired_timezone)
+).filter(
+    (col("pickup_datetime_tz").isNotNull()) &
+    (col("tpep_dropoff_datetime").isNotNull()) &
+    (col("pickup_datetime_tz") <= col("dropoff_datetime_tz")) &
+    (year(col("pickup_datetime_tz")) == 2024) &
+    (month(col("pickup_datetime_tz")) == 10) &
+    (dayofmonth(col("pickup_datetime_tz")) == 15)
+)
+
+# Count the number of trips with converted time zone
+count_tz = oct_15_trips_tz.count()
+print(f"Number of trips on October 15, 2024 (Timezone {desired_timezone}): {count_tz}")
 
 # Count before removing duplicates
 count_with_duplicates = oct_15_trips.count()

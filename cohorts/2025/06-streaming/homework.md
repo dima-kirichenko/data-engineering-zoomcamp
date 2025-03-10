@@ -24,7 +24,7 @@ It's the same setup as in the [pyflink module](../../../06-streaming/pyflink/), 
 
 ```bash
 cd ../../../06-streaming/pyflink/
-docker-compose up
+docker compose up
 ```
 
 (Add `-d` if you want to run in detached mode)
@@ -72,6 +72,10 @@ Find out what you need to execute based on the `help` output.
 
 What's the version, based on the output of the command you executed? (copy the entire version)
 
+### Solution
+
+```bash
+```
 
 ## Question 2. Creating a topic
 
@@ -84,6 +88,10 @@ Read the output of `help` and based on it, create a topic with name `green-trips
 
 What's the output of the command for creating a topic? Include the entire output in your answer.
 
+### Solution
+
+```bash
+```
 
 ## Question 3. Connecting to the Kafka server
 

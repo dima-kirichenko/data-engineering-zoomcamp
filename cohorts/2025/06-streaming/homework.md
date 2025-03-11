@@ -75,6 +75,8 @@ What's the version, based on the output of the command you executed? (copy the e
 ### Solution
 
 ```bash
+$ docker exec -it redpanda-1 rpk version
+v24.2.18
 ```
 
 ## Question 2. Creating a topic
@@ -91,6 +93,9 @@ What's the output of the command for creating a topic? Include the entire output
 ### Solution
 
 ```bash
+$ docker exec -it redpanda-1 rpk topic create green-trips
+TOPIC        STATUS
+green-trips  OK
 ```
 
 ## Question 3. Connecting to the Kafka server
@@ -130,6 +135,13 @@ producer.bootstrap_connected()
 
 Provided that you can connect to the server, what's the output
 of the last command?
+
+### Solution
+
+```bash
+Connection result: True
+```
+* [kafka_connect.py](kafka_connect.py)
 
 ## Question 4: Sending the Trip Data
 
@@ -175,6 +187,12 @@ took = t1 - t0
 
 How much time did it take to send the entire dataset and flush? 
 
+### Solution
+
+```bash
+Time taken: 96.71 seconds
+```
+* [send_taxi_data.py](send_taxi_data.py)
 
 ## Question 5: Build a Sessionization Window (2 points)
 

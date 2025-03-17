@@ -139,7 +139,7 @@ of the last command?
 ### Solution
 
 ```bash
-Connection result: True
+True
 ```
 * [kafka_connect.py](kafka_connect.py)
 
